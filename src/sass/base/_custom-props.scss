@@ -1,0 +1,11 @@
+@use "sass:color";
+@use "../abstracts" as *;
+
+// loop colors
+:root {
+
+@each $name, $value in $colors{
+    --#{$name}-light: #{color.adjust($value, $lightness: -10%)};
+    --#{$name}-dark: #{color.adjust($value, $lightness: -15%)};
+ }
+}

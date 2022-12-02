@@ -1,0 +1,239 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding and reset fonts */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+*::before,
+*::after {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  --green-light: hsl(123deg, 47%, 74%);
+  --green-dark: #2e7f32;
+  --blue-light: hsl(210deg, 47%, 74%);
+  --blue-dark: #2e577f;
+  --orange-light: hsl(34deg, 93%, 77%);
+  --orange-dark: #b66a07;
+  --purple-light: hsl(231deg, 44%, 76%);
+  --purple-dark: #334084;
+  --yellow-light: hsl(54deg, 76%, 79%);
+  --yellow-dark: #afa018;
+  --brown-light: hsl(20deg, 41%, 69%);
+  --brown-dark: #68402c;
+  --red-light: hsl(0deg, 59%, 76%);
+  --red-dark: #922626;
+  --pink-light: hsl(295deg, 42%, 72%);
+  --pink-dark: #6e2f74;
+  --white-light: hsl(0deg, 0%, 100%);
+  --white-dark: #999999;
+}
+
+body {
+  font-family: system-ui;
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  overflow: hidden;
+}
+
+.orbit {
+  --size: 12rem;
+  --speed: 120s;
+}
+.orbit .center-img {
+  width: var(--size);
+  position: relative;
+  z-index: 10;
+}
+.orbit .center-img img {
+  position: absolute;
+  border-radius: 50%;
+}
+.orbit ul {
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  position: relative;
+  list-style: none;
+  --icon-bg: var(--green-light);
+  --text-bg: var(--green-dark);
+  transform-origin: center;
+  -webkit-animation: orbit var(--speed) linear infinite;
+          animation: orbit var(--speed) linear infinite;
+}
+.orbit ul:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+  --orbit-play-state: paused;
+}
+.orbit li {
+  --icon-bg: red;
+  --text-bg: blue;
+  position: absolute;
+  width: 8rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  font-weight: 500;
+  color: var(--white-light);
+  text-align: center;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+.orbit li:hover {
+  --throb-play-state: paused;
+}
+.orbit li:nth-child(1) {
+  --throb-delay: 0ms;
+}
+.orbit li:nth-child(2) {
+  --throb-delay: 50ms;
+}
+.orbit li:nth-child(3) {
+  --throb-delay: 100ms;
+}
+.orbit li:nth-child(4) {
+  --throb-delay: 150ms;
+}
+.orbit li:nth-child(5) {
+  --throb-delay: 200ms;
+}
+.orbit li:nth-child(6) {
+  --throb-delay: 250ms;
+}
+.orbit li > * {
+  position: absolute;
+  animation: orbit var(--speed) linear reverse infinite, throb 1s var(--throb-delay) ease-in-out infinite alternate;
+  -webkit-animation-play-state: var(--orbit-play-state, running), var(--throb-play-state, running);
+          animation-play-state: var(--orbit-play-state, running), var(--throb-play-state, running);
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+}
+.orbit li img {
+  width: 5rem;
+}
+.orbit li > div {
+  background: var(--icon-bg);
+}
+.orbit li > p {
+  background: var(--text-bg);
+  transition: opacity 500ms;
+  opacity: 0;
+}
+.orbit li:hover > p {
+  opacity: 1;
+}
+
+li:nth-child(1) {
+  --icon-bg: var(--blue-light);
+  --text-bg: var(--blue-dark);
+  transform: translate(14rem, 0.75rem);
+}
+
+li:nth-child(2) {
+  --icon-bg: var(--green-light);
+  --text-bg: var(--green-dark);
+  transform: translate(7.5rem, 13rem);
+}
+
+li:nth-child(3) {
+  --icon-bg: var(--orange-light);
+  --text-bg: var(--orange-dark);
+  transform: translate(-7.5rem, 12.5rem);
+}
+
+li:nth-child(4) {
+  --icon-bg: var(--purple-light);
+  --text-bg: var(--purple-dark);
+  transform: translate(-14rem, 0.75rem);
+}
+
+li:nth-child(5) {
+  --icon-bg: var(--yellow-light);
+  --text-bg: var(--yellow-dark);
+  transform: translate(-7.5rem, -11rem);
+}
+
+li:nth-child(6) {
+  --icon-bg: var(--red-light);
+  --text-bg: var(--red-dark);
+  transform: translate(7.5rem, -11rem);
+}
+
+@-webkit-keyframes orbit {
+  100% {
+    rotate: 1turn;
+  }
+}
+
+@keyframes orbit {
+  100% {
+    rotate: 1turn;
+  }
+}
+@-webkit-keyframes hold-position {
+  100% {
+    rotate: -1turn;
+  }
+}
+@keyframes hold-position {
+  100% {
+    rotate: -1turn;
+  }
+}
+@-webkit-keyframes throb {
+  100% {
+    scale: 1.1;
+  }
+}
+@keyframes throb {
+  100% {
+    scale: 1.1;
+  }
+}/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,167 @@
+
+.orbit{
+    // opacity: 0;
+    --size: 12rem;
+    --speed: 120s;
+    cursor: pointer;
+
+    .center-img{
+        width: var(--size);
+        position: relative;
+        z-index: 10;
+        ;
+
+        img{
+            position: absolute;
+            border-radius: 50%;
+        }
+    }
+
+    ul{
+        display: grid;
+        place-items: center;
+        width: var(--size);
+        height: var(--size);
+        position: relative;
+        list-style: none;
+        --icon-bg: var(--col-one-light);
+        --text-bg: var(--col-one-dark);
+        transform-origin: center;
+        animation: orbit var(--speed) linear infinite;
+
+        &:hover{
+            animation-play-state: paused;
+            --orbit-play-state: paused;
+        }
+ 
+    }
+
+    li{
+        --icon-bg: red;
+        --text-bg: blue;
+        position: absolute;
+        width: 8rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        font-weight: 500;
+        color: var(--colone-light);
+        text-align: center;
+        line-height: 1;
+        display: grid;
+        place-items: center; 
+
+        &:hover {
+            --throb-play-state: paused;
+        }
+
+        @for $i from 0 to 6 {
+            &:nth-child(#{$i + 1}){
+                --throb-delay: #{50ms * $i};
+            }
+        }  
+    
+
+        & > * {
+            position: absolute;
+            animation: orbit var(--speed) linear reverse infinite, throb 1s var(--throb-delay) ease-in-out infinite alternate;
+            animation-play-state: var(--orbit-play-state, running), var(--throb-play-state, running);
+
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            border-radius: inherit; 
+        }
+
+        
+        img{
+            width: 4rem;
+        }
+
+        > div { 
+            background: var(--icon-bg); 
+        }
+
+        .pdiv{
+            transition: opacity 500ms;
+            opacity: 0; 
+            background: var(--text-bg);
+
+            &:hover{
+                opacity: 1;
+            }
+        }
+
+        > p{
+            background: var(--text-bg);
+            transition: opacity 500ms;
+            opacity: 0;
+        }
+
+        &:hover > p {
+            opacity: 1;   
+        }
+    }
+}
+
+//My projects
+    li:nth-child(1) {
+        --icon-bg: var(--coltwo-light);
+        --text-bg: var(--coltwo-dark);
+        transform: translate(14rem, 0.75rem);
+       
+    }
+// SKills
+    li:nth-child(2) {
+        --icon-bg: var(--coltwo-light);
+        --text-bg: var(--coltwo-dark);
+        transform: translate(7.5rem, 13rem);
+    }
+// About
+    li:nth-child(3) {
+        --icon-bg: var(--coltwo-light);
+        --text-bg: var(--coltwo-dark);
+        transform: translate(-7.5rem, 12.5rem);
+    }
+// portfolio
+    li:nth-child(4) {
+        --icon-bg: var(--coltwo-light);
+        --text-bg: var(--coltwo-dark);
+        transform: translate(-14rem, 0.75rem);
+    }
+// hobbies
+    li:nth-child(5) {
+        --icon-bg: var(--coltwo-light);
+        --text-bg: var(--coltwo-dark);
+        transform: translate(-7.5rem, -11rem);
+    }
+// get in touch
+    li:nth-child(6) {
+        --icon-bg: var(--coltwo-light);
+        --text-bg: var(--coltwo-dark);
+        transform: translate(7.5rem, -11rem);
+    }
+    
+
+
+
+// Animations
+
+@keyframes orbit {
+    100% {
+        rotate: 1turn;
+    }
+}
+
+@keyframes hold-position {
+    100% {
+        rotate: -1turn;
+    }
+}
+
+@keyframes throb {
+    100% {
+        scale: 1.1;
+    }
+}
+

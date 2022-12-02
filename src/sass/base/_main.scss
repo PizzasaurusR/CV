@@ -1,0 +1,44 @@
+:root {
+    --gradient: linear-gradient(
+    #222831,
+    hsl(213, 5%, 41%)
+    );
+}
+
+body {
+    background-image: var(--gradient);
+    // background-size: 400%;
+    font-family: 'Kanit', sans-serif;
+    animation: bg-animation 60s linear infinite alternate;
+    display: grid;
+    min-height: 100vh;
+    place-content: center;
+    overflow: hidden;
+   }
+
+h1{
+    font-weight: 600;
+    color: hsl(183, 100%, 35%);
+    font-size: 10rem;
+    text-align: center;
+}
+
+section {
+    height: 100vh;
+  }
+
+  .tag {
+    opacity: 0;
+    transform: translate(0, 10vh);
+    transition: all 1s;
+  }
+
+  .tag.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+
+// @keyframes fade-in {
+
+// }
